@@ -10,7 +10,7 @@ Original file is located at
 
 import urllib
 print("Password/Endpoint IP for localtunnel is:", urllib.request.urlopen('https://ipv4.icanhazip.com').read().decode('utf8').strip())
-!streamlit run app.py & npx localtunnel --port 8501
+
 
 # Commented out IPython magic to ensure Python compatibility.
 # %%writefile app.py

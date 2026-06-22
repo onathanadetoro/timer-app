@@ -14,69 +14,69 @@ print("Password/Endpoint IP for localtunnel is:", urllib.request.urlopen('https:
 
 # Commented out IPython magic to ensure Python compatibility.
 # %%writefile app.py
-# import streamlit as st
-# import time
-# from datetime import datetime, timedelta
-# 
-# def run_clock():
-#     st.header("World Clock")
-#     cols = st.columns(4)
-#     t = datetime.utcnow()
-#     zones = {
-#         "Calgary": -6,
-#         "New York": -4,
-#         "Tokyo": 9,
-#         "London": 1
-#     }
-#     for i, (city, offset) in enumerate(zones.items()):
-#         city_time = (t + timedelta(hours=offset)).strftime("%H:%M:%S")
-#         cols[i].metric(city, city_time)
-#     if st.button("Refresh Clock"):
-#         st.rerun()
-# 
-# def run_stopwatch():
-#     st.header("Stopwatch")
-#     if "sw_start" not in st.session_state:
-#         st.session_state.sw_start = None
-# 
-#     col1, col2, col3 = st.columns(3)
-#     if col1.button("Start"):
-#         st.session_state.sw_start = time.time()
-#     if col2.button("Stop"):
-#         st.session_state.sw_start = None
-#     if col3.button("Reset"):
-#         st.session_state.sw_start = None
-# 
-#     display_area = st.empty()
-#     if st.session_state.sw_start:
-#         while st.session_state.sw_start:
-#             elapsed = time.time() - st.session_state.sw_start
-#             display_area.write(f"⏱ {time.strftime('%H:%M:%S', time.gmtime(elapsed))}.{int((elapsed % 1) * 1000):03}")
-#             time.sleep(0.1)
-#     else:
-#         display_area.write("⏱ 00:00:00.000")
-# 
-# def run_timer():
-#     st.header("Timer")
-#     h = st.number_input("Hours", min_value=0)
-#     m = st.number_input("Minutes", min_value=0, max_value=59)
-#     s = st.number_input("Seconds", min_value=0, max_value=59)
-# 
-#     if st.button("Start Timer"):
-#         total_seconds = h * 3600 + m * 60 + s
-#         t_display = st.empty()
-#         while total_seconds > 0:
-#             t_display.subheader(f"Time Remaining: {timedelta(seconds=total_seconds)}")
-#             time.sleep(1)
-#             total_seconds -= 1
-#         st.success("Timer finished!")
-# 
-# st.title("Utility App")
-# choice = st.sidebar.selectbox("Options", ["Select", "Stopwatch", "Timer", "Clock"])
-# 
-# if choice == "Clock":
-#     run_clock()
-# elif choice == "Stopwatch":
-#     run_stopwatch()
-# elif choice == "Timer":
-#     run_timer()
+import streamlit as st
+import time
+from datetime import datetime, timedelta
+
+def run_clock():
+    st.header("World Clock")
+    cols = st.columns(4)
+    t = datetime.utcnow()
+    zones = {
+        "Calgary": -6,
+        "New York": -4,
+        "Tokyo": 9,
+        "London": 1
+    }
+    for i, (city, offset) in enumerate(zones.items()):
+        city_time = (t + timedelta(hours=offset)).strftime("%H:%M:%S")
+        cols[i].metric(city, city_time)
+    if st.button("Refresh Clock"):
+        st.rerun()
+
+def run_stopwatch():
+    st.header("Stopwatch")
+    if "sw_start" not in st.session_state:
+        st.session_state.sw_start = None
+
+    col1, col2, col3 = st.columns(3)
+    if col1.button("Start"):
+        st.session_state.sw_start = time.time()
+    if col2.button("Stop"):
+        st.session_state.sw_start = None
+    if col3.button("Reset"):
+        st.session_state.sw_start = None
+
+    display_area = st.empty()
+    if st.session_state.sw_start:
+        while st.session_state.sw_start:
+            elapsed = time.time() - st.session_state.sw_start
+            display_area.write(f"⏱ {time.strftime('%H:%M:%S', time.gmtime(elapsed))}.{int((elapsed % 1) * 1000):03}")
+            time.sleep(0.1)
+    else:
+        display_area.write("⏱ 00:00:00.000")
+
+def run_timer():
+    st.header("Timer")
+    h = st.number_input("Hours", min_value=0)
+    m = st.number_input("Minutes", min_value=0, max_value=59)
+    s = st.number_input("Seconds", min_value=0, max_value=59)
+
+    if st.button("Start Timer"):
+        total_seconds = h * 3600 + m * 60 + s
+        t_display = st.empty()
+        while total_seconds > 0:
+            t_display.subheader(f"Time Remaining: {timedelta(seconds=total_seconds)}")
+            time.sleep(1)
+            total_seconds -= 1
+        st.success("Timer finished!")
+ 
+st.title("Utility App")
+choice = st.sidebar.selectbox("Options", ["Select", "Stopwatch", "Timer", "Clock"])
+
+if choice == "Clock":
+    run_clock()
+elif choice == "Stopwatch":
+    run_stopwatch()
+elif choice == "Timer":
+    run_timer()

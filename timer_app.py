@@ -7,8 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1VYEdxFm7nvdDS6k_RydCtO9hS75LvGzL
 """
 
-!pip install -q streamlit
-
 !npm install -q -g localtunnel
 import urllib
 print("Password/Endpoint IP for localtunnel is:", urllib.request.urlopen('https://ipv4.icanhazip.com').read().decode('utf8').strip())
